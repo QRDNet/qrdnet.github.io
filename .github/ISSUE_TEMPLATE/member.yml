@@ -1,0 +1,21 @@
+name: "Member Examination Application"
+description: "Complete and submit the QRDNet Certified Member examination"
+title: "[MEMBER EXAM]: "
+labels: ["exam-member"]
+body:
+  - type: input
+    id: email
+    attributes:
+      label: "Email address"
+      description: "Your QRDNet ID certificate will be sent here after you pass the examination."
+      placeholder: "example@domain.com"
+    validations:
+      required: true
+  - type: textarea
+    id: answers
+    attributes:
+      label: "Examination Answers / Justification"
+      description: "Answer the Member examination questions and provide the required information."
+      placeholder: "Enter your answers here..."
+    validations:
+      required: true

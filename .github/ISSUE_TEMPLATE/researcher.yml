@@ -1,0 +1,21 @@
+name: "Researcher Examination Application"
+description: "Submit the QRDNet Certified Researcher report and research data"
+title: "[RESEARCHER EXAM]: "
+labels: ["exam-researcher"]
+body:
+  - type: input
+    id: email
+    attributes:
+      label: "Email address"
+      description: "Your QRDNet ID certificate will be sent here after you pass the examination."
+      placeholder: "example@domain.com"
+    validations:
+      required: true
+  - type: textarea
+    id: project_link
+    attributes:
+      label: "Research Project / Notebook Link or Description"
+      description: "Provide a link to your reproducible research, such as a GitHub repository, Jupyter Notebook, or LaTeX document."
+      placeholder: "https://github.com/..."
+    validations:
+      required: true

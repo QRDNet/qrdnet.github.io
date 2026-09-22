@@ -1,0 +1,21 @@
+name: "Developer Examination Application"
+description: "Submit QRDNet Certified Developer code and CI/CD work"
+title: "[DEVELOPER EXAM]: "
+labels: ["exam-developer"]
+body:
+  - type: input
+    id: email
+    attributes:
+      label: "Email address"
+      description: "Your QRDNet ID certificate will be sent here after you pass the examination."
+      placeholder: "example@domain.com"
+    validations:
+      required: true
+  - type: textarea
+    id: repo_link
+    attributes:
+      label: "Development Assignment / Pull Request Link"
+      description: "Provide your code, repository, or pull request link."
+      placeholder: "https://github.com/..."
+    validations:
+      required: true
