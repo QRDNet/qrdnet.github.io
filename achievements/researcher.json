@@ -1,0 +1,15 @@
+{
+  "@context": "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.1.json",
+  "id": "https://qrdnet.github.io/achievements/researcher.json",
+  "type": "Achievement",
+  "name": "QRDNet Certified Researcher",
+  "description": "Certifies knowledge of quantum theory research, simulation, and Open Science methodologies.",
+  "image": {
+    "id": "https://qrdnet.github.io/badges/researcher.png",
+    "type": "Image"
+  },
+  "criteria": {
+    "id": "https://qrdnet.github.io/criteria/researcher.html",
+    "narrative": "The candidate successfully completed the quantum simulation task and submitted Open Science documentation."
+  }
+}

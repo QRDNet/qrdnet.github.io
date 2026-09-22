@@ -1,0 +1,41 @@
+name: QRDNet Certificate Issuance
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  issue-badge:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Dependencies
+        run: pip install cryptography
+
+      - name: Generate certificate
+        env:
+          QRDNET_PRIVATE_KEY: ${{ secrets.QRDNET_PRIVATE_KEY }}
+        run: |
+          # Generate a unique QRDNet ID
+          YEAR=$(date +%Y)
+          RAND=$(openssl rand -hex 3 | tr 'a-z' 'A-Z')
+          QRDNET_ID="QRDN-ID-${YEAR}-${RAND}"
+          
+          # Call the signing script (example: researcher level)
+          python scripts/issue_credential.py "${{ github.event.pull_request.user.login }}" "user@example.com" "researcher" "$QRDNET_ID" "$QRDNET_PRIVATE_KEY"
+
+      - name: Commit changes to the repository
+        run: |
+          git config --global user.name "QRDNet Bot"
+          git config --global user.email "bot@qrdnet.org"
+          git add registry/credentials/
+          git commit -m "New QRDNet certificate issued"
+          git push

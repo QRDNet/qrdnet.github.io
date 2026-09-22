@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QRDNet - Open Badges Portal</title>
+  <style>
+    body { font-family: sans-serif; background: #0a0e17; color: #fff; text-align: center; padding: 40px; margin: 0; }
+    .container { max-width: 900px; margin: auto; }
+    h1 { color: #fff; margin-bottom: 10px; }
+    p.subtitle { color: #94a3b8; margin-bottom: 40px; }
+    .grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+    .card { background: #131b2e; border: 1px solid #1e2d4a; padding: 25px; border-radius: 12px; width: 260px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
+    .card h3 { margin-top: 0; color: #38bdf8; }
+    .card p { color: #94a3b8; font-size: 14px; }
+    .btn { display: block; text-align: center; background: #2563eb; color: white; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 15px; }
+    .btn:hover { background: #1d4ed8; }
+    .verify-box { background: #131b2e; border: 1px solid #1e2d4a; padding: 25px; border-radius: 12px; max-width: 500px; margin: auto; }
+    input { padding: 10px; width: 60%; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; }
+    .v-btn { padding: 10px 15px; background: #10b981; border: none; border-radius: 6px; color: #0a0e17; font-weight: bold; cursor: pointer; }
+    .v-btn:hover { background: #059669; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>QRDNet Open Quantum Network</h1>
+    <p class="subtitle">An open-standard, GitHub-based Open Badges 3.0 examination and certificate management system.</p>
+
+    <h2>Available Examinations and Criteria</h2>
+    <div class="grid">
+      <!-- Member Card -->
+      <div class="card">
+        <div>
+          <h3>Member</h3>
+          <p>Verification of basic network knowledge and community membership.</p>
+        </div>
+        <a class="btn" href="criteria/member.html">Details & Examination</a>
+      </div>
+
+      <!-- Researcher Card -->
+      <div class="card">
+        <div>
+          <h3>Researcher</h3>
+          <p>Quantum theory research, simulations, and Open Science reports.</p>
+        </div>
+        <a class="btn" href="criteria/researcher.html">Details & Examination</a>
+      </div>
+
+      <!-- Developer Card -->
+      <div class="card">
+        <div>
+          <h3>Developer</h3>
+          <p>Quantum algorithms, software development, and CI/CD automation.</p>
+        </div>
+        <a class="btn" href="criteria/developer.html">Details & Examination</a>
+      </div>
+    </div>
+
+    <!-- Certificate Verification Section -->
+    <div class="verify-box">
+      <h3>Verify an Existing Certificate</h3>
+      <p style="font-size: 13px; color: #94a3b8;">Enter the QRDNet ID (e.g. QRDN-ID-2026-XXXX)</p>
+      <input type="text" id="certId" placeholder="QRDN-ID-2026-XXXX">
+      <button class="v-btn" onclick="checkCert()">Verify</button>
+    </div>
+  </div>
+
+  <script>
+    function checkCert() {
+      const id = document.getElementById('certId').value.trim();
+      if (id) {
+        window.location.href = `verify.html?id=${id}`;
+      } else {
+        alert('Please enter a valid ID!');
+      }
+    }
+  </script>
+</body>
+</html>

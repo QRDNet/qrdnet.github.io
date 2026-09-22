@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QRDNet Certificate Verifier</title>
+  <style>
+    body { font-family: sans-serif; background: #0a0e17; color: #fff; text-align: center; padding: 40px; }
+    .card { background: #131b2e; border: 1px solid #1e2d4a; padding: 20px; border-radius: 12px; display: inline-block; max-width: 450px; }
+    img { width: 200px; height: auto; }
+    .badge-status { color: #4caf50; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="card" id="cert-card">
+    <h2>QRDNet Certificate Verification</h2>
+    <div id="result">Query in progress...</div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const qrdnetId = urlParams.get('id');
+
+    if (qrdnetId) {
+      fetch(`./registry/credentials/${qrdnetId}.json`)
+        .then(res => {
+          if (!res.ok) throw new Error("The specified QRDNet ID was not found.");
+          return res.json();
+        })
+        .then(data => {
+          const certType = data.credentialSubject.achievement.split('/').pop().replace('.json', '');
+          document.getElementById('result').innerHTML = `
+            <img src="./badges/${certType}.png" alt="Badge"><br>
+            <h3>${data.credentialSubject.name}</h3>
+            <p class="badge-status">✓ Verified Open Badges 3.0 Certificate</p>
+            <p><strong>ID:</strong> ${data.credentialSubject.qrdnetId}</p>
+            <p><strong>Issue date:</strong> ${new Date(data.issuanceDate).toLocaleDateString()}</p>
+          `;
+        })
+        .catch(err => {
+          document.getElementById('result').innerHTML = `<p style="color:#f44336;">${err.message}</p>`;
+        });
+    } else {
+      document.getElementById('result').innerHTML = `<p>Please provide a valid QRDNet ID in the URL (e.g. ?id=QRDN-ID-2026-XXXXX)!</p>`;
+    }
+  </script>
+</body>
+</html>

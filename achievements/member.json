@@ -1,0 +1,15 @@
+{
+	"@context": "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.1.json",
+	"id": "https://qrdnet.github.io/achievements/member.json",
+	"type": "Achievement",
+	"name": "QRDNet Certified Member",
+	"description": "Certifies membership in the QRDNet community and commitment to quantum research and education.",
+	"image": {
+		"id": "https://qrdnet.github.io/badges/member.png",
+		"type": "Image"
+	},
+	"criteria": {
+		"id": "https://qrdnet.github.io/criteria/member.html",
+		"narrative": "The candidate has joined the QRDNet community and accepted its membership principles."
+	}
+}

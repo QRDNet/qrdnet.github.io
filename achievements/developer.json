@@ -1,0 +1,15 @@
+{
+	"@context": "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.1.json",
+	"id": "https://qrdnet.github.io/achievements/developer.json",
+	"type": "Achievement",
+	"name": "QRDNet Certified Quantum Developer",
+	"description": "Certifies knowledge of quantum software development, programming, and quantum computing technologies.",
+	"image": {
+		"id": "https://qrdnet.github.io/badges/developer.png",
+		"type": "Image"
+	},
+	"criteria": {
+		"id": "https://qrdnet.github.io/criteria/developer.html",
+		"narrative": "The candidate successfully passed the quantum developer examination and demonstrated the ability to design and implement quantum software."
+	}
+}
