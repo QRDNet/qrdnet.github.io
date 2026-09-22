@@ -1,41 +1,45 @@
-name: QRDNet Certificate Issuance
+name: Issue QRDNet Credential
 
 on:
   pull_request:
     types: [closed]
+    branches: [main]
 
 jobs:
-  issue-badge:
+  issue:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Python environment
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
-      - name: Dependencies
+      - name: Install dependencies
         run: pip install cryptography
 
-      - name: Generate certificate
+      - name: Generate Credential
         env:
           QRDNET_PRIVATE_KEY: ${{ secrets.QRDNET_PRIVATE_KEY }}
         run: |
-          # Generate a unique QRDNet ID
-          YEAR=$(date +%Y)
-          RAND=$(openssl rand -hex 3 | tr 'a-z' 'A-Z')
-          QRDNET_ID="QRDN-ID-${YEAR}-${RAND}"
+          # Itt generálhatsz egyedi QRDNet ID-t is dinamikusan
+          QRDN_ID="QRDN-ID-$(date +%Y)-$(openssl rand -hex 3 | tr '[:lower:]' '[:upper:']')"
           
-          # Call the signing script (example: researcher level)
-          python scripts/issue_credential.py "${{ github.event.pull_request.user.login }}" "user@example.com" "researcher" "$QRDNET_ID" "$QRDNET_PRIVATE_KEY"
+          # Szkript meghívása a te kódoddal
+          python scripts/issue_credential.py \
+            "${{ github.event.pull_request.user.login }}" \
+            "noreply@qrdnet.github.io" \
+            "researcher" \
+            "$QRDN_ID" \
+            "$QRDNET_PRIVATE_KEY"
 
-      - name: Commit changes to the repository
+      - name: Commit and push generated credential
         run: |
           git config --global user.name "QRDNet Bot"
-          git config --global user.email "bot@qrdnet.org"
-          git add registry/credentials/
-          git commit -m "New QRDNet certificate issued"
+          git config --global user.email "bot@qrdnet.github.io"
+          git add registry/credentials/*.json
+          git commit -m "Auto-issued credential for $QRDN_ID"
           git push
